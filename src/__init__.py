@@ -1,0 +1,3 @@
+from src.excel_io import ExcelExporter
+# ...
+self.exporter = ExcelExporter()  # сразу после инициализации cm/om
