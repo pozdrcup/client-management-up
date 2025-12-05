@@ -8,7 +8,7 @@ class DatabaseManager:
             host="localhost",
             database="client_db",
             user="postgres",
-            password="9156"  # ← ОБЯЗАТЕЛЬНО укажите!
+            password= 9156  # ← ОБЯЗАТЕЛЬНО укажите!
         )
         self.cursor = self.conn.cursor(cursor_factory=RealDictCursor)
 
@@ -16,5 +16,6 @@ class DatabaseManager:
         if hasattr(self, 'conn') and self.conn:
             self.conn.close()
 )
+
 
 
