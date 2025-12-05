@@ -32,9 +32,9 @@ class ExcelImporter:
                 self.cm.add_client(client)
                 imported += 1
             except Exception as e:
-                print(f"⚠️ Ошибка при импорте клиента '{row.get('ФИО', 'N/A')}': {e}")
+                print(f" Ошибка при импорте клиента '{row.get('ФИО', 'N/A')}': {e}")
 
-        print(f"✅ Импортировано {imported} клиентов из {file_path}")
+        print(f" Импортировано {imported} клиентов из {file_path}")
         return imported
 
     def import_orders_from_excel(self, file_path: str):
@@ -54,7 +54,7 @@ class ExcelImporter:
                 client_id = int(row['ID клиента'])
                 # Проверим, существует ли клиент
                 if not self.cm.get_client_by_id(client_id):
-                    print(f"⚠️ Клиент с ID={client_id} не найден. Заказ пропущен.")
+                    print(f" Клиент с ID={client_id} не найден. Заказ пропущен.")
                     continue
 
                 order = Order(
@@ -66,11 +66,12 @@ class ExcelImporter:
                 self.om.add_order(order)
                 imported += 1
             except Exception as e:
-                print(f"⚠️ Ошибка при импорте заказа: {e}")
+                print(f" Ошибка при импорте заказа: {e}")
 
-        print(f"✅ Импортировано {imported} заказов из {file_path}")
+        print(f" Импортировано {imported} заказов из {file_path}")
         return imported
 
     def close(self):
         self.cm.close()
         self.om.close()
+
