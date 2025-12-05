@@ -25,4 +25,11 @@ class DatabaseManager:
     def close(self):
         self.cursor.close()
         self.conn.close()
+# src/db.py
+self.conn = psycopg2.connect(
+    host="localhost",
+    database="client_db",
+    user="postgres",
+    password="9156"  
+)
 
