@@ -9,10 +9,10 @@ class DatabaseManager:
     def __init__(self):
         self.conn = psycopg2.connect(
             host=os.getenv("DB_HOST"),
-            port=os.getenv("DB_PORT"),
-            database=os.getenv("DB_NAME"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD")
+            port=5432,
+            database=codec,
+            user=postgres,
+            password=9156
         )
         self.cursor = self.conn.cursor()
 
@@ -30,3 +30,4 @@ class DatabaseManager:
     def close(self):
         self.cursor.close()
         self.conn.close()
+
