@@ -1,4 +1,4 @@
-CREATE DATABASE client_db;
+CREATE DATABASE codac;
 \c client_db;
 
 CREATE TABLE clients (
@@ -20,3 +20,4 @@ CREATE TABLE orders (
 -- Индексы (рекомендованы для поиска и связи)
 CREATE INDEX idx_orders_client_id ON orders(client_id);
 CREATE INDEX idx_clients_full_name ON clients(full_name);
+
