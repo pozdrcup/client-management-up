@@ -1,35 +1,20 @@
+# src/db.py
 import psycopg2
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
+from psycopg2.extras import RealDictCursor
 
 class DatabaseManager:
     def __init__(self):
         self.conn = psycopg2.connect(
-            host=os.getenv("DB_HOST", "localhost"),
-            port=os.getenv("DB_PORT", "5432"),
-            database=os.getenv("DB_NAME", "client_db"),
-            user=os.getenv("DB_USER", "postgres"),
-            password=os.getenv("DB_PASSWORD", "postgres")
+            host="localhost",
+            database="client_db",
+            user="postgres",
+            password="9156"  # ← ОБЯЗАТЕЛЬНО укажите!
         )
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor(cursor_factory=RealDictCursor)
 
-    def execute_query(self, query, params=None):
-        self.cursor.execute(query, params)
-        if query.strip().upper().startswith("SELECT"):
-            return self.cursor.fetchall()
-        else:
-            self.conn.commit()
-
-    def close(self):
-        self.cursor.close()
-        self.conn.close()
-# src/db.py
-self.conn = psycopg2.connect(
-    host="localhost",
-    database="client_db",
-    user="postgres",
-    password="9156"  
+    def __del__(self):
+        if hasattr(self, 'conn') and self.conn:
+            self.conn.close()
 )
+
 
