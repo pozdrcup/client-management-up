@@ -1,5 +1,4 @@
 import psycopg2
-from psycopg2 import sql
 import os
 from dotenv import load_dotenv
 
@@ -8,24 +7,20 @@ load_dotenv()
 class DatabaseManager:
     def __init__(self):
         self.conn = psycopg2.connect(
-            host=os.getenv("DB_HOST"),
-            port=5432,
-            database=codec,
-            user=postgres,
-            password=9156
+            host=os.getenv("DB_HOST", "localhost"),
+            port=os.getenv("DB_PORT", "5432"),
+            database=os.getenv("DB_NAME", "client_db"),
+            user=os.getenv("DB_USER", "postgres"),
+            password=os.getenv("DB_PASSWORD", "postgres")
         )
         self.cursor = self.conn.cursor()
 
     def execute_query(self, query, params=None):
-        try:
-            self.cursor.execute(query, params)
-            if query.strip().upper().startswith("SELECT"):
-                return self.cursor.fetchall()
-            else:
-                self.conn.commit()
-        except Exception as e:
-            print(f"Ошибка при выполнении запроса: {e}")
-            self.conn.rollback()
+        self.cursor.execute(query, params)
+        if query.strip().upper().startswith("SELECT"):
+            return self.cursor.fetchall()
+        else:
+            self.conn.commit()
 
     def close(self):
         self.cursor.close()
