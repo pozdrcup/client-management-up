@@ -1,0 +1,14 @@
+# Виртуальное окружение
+venv/
+.env
+
+# Кэш Python
+__pycache__/
+*.pyc
+
+# Excel-файлы, созданные при экспорте 
+/export/*.xlsx
+
+# IDE
+.vscode/
+.idea/
